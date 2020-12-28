@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+
+					<div class="mycart mt-3">
+
+						<div class="container text-center">
+							<img width="100px" th:src="@{/img/register.png}" alt="Register" />
+						</div>
+
+						<h1 class="text-center">Register Here !!</h1>
+						<form action="" th:action="@{/form_register}" method="post" th:object="${user}">
+
+							<div class="mb-3">
+								<label for="name_field" class="form-label">Name :</label> 
+								<input type="text" class="form-control"  th:value="${user.name}" name="name" id="name_field" placeholder="Enter name" required="required">
+							</div>
+
+							<div class="mb-3">
+								<label for="name_field" class="form-label">Email : </label>
+								 <input type="email" class="form-control" th:value="${user.email}" name="email" id="email_field" placeholder="Enter email" required="required">
+							</div>
+
+							<div class="mb-3">
+								<label for="password_field" class="form-label">Password : </label>
+								 <input type="password" class="form-control" th:value="${user.password}" name="password" id="password_field" placeholder="Enter password" required="required">
+							</div>
+
+
+							<div class="mb-3">
+								<label for="about_field" class="form-label">About : </label>
+								<textarea th:value="${user.about}" name="about_field" id="about" rows="10" cols="30" class="form-control" placeholder="Enter about Something..."> </textarea>
+							</div>
+
+							<div class="form-group form-check">
+								<input type="checkbox" name="agreement" class="form-check-input" id=agreement /> <label for="agreement">Accept Terms and Conditions</label>
+							</div>
+
+							<div class="container text-center">
+								<button type="submit" class="btn bg-primary btn-block">Submit</button>
+								<button type="reset" class="btn btn-warning btn-block">Reset</button>
+							</div>
+
+
+						</form>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+
+
+
+</body>
+</html>
