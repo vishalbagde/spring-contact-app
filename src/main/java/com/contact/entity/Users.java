@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "USERS")
@@ -19,9 +23,13 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@NotBlank(message = "Name Should not be Blank!")
+	@Size(min = 2,max = 30,message = "Min 2 and max 30 caracter Valid")	 
 	private String  name;
 	
-	@Column(unique = true)
+	@Column(unique = true) 
+	@Email(message = "Email should be valid")
 	private String email;
 	
 	@Column(unique = true)
