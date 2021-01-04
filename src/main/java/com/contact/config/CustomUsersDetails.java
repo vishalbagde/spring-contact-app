@@ -1,8 +1,13 @@
 package com.contact.config;
 
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.contact.entity.Users;
@@ -24,8 +29,9 @@ public class CustomUsersDetails implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		 SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.users.getRole());
+		 return new ArrayList<GrantedAuthority>(Arrays.asList(simpleGrantedAuthority));
+		 
 	}
 
 	@Override
