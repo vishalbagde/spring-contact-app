@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ public class HomeController {
 
 	@Autowired
 	private UsersRepository usersRepository;
+
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@GetMapping("/")
 	public String home(Model model) {
@@ -54,14 +58,15 @@ public class HomeController {
 				model.addAttribute("user", users);
 				return "signup";
 			}
-			
+
 			if (!agreement) {
 				System.out.println("You Do not agree Term And conditions");
 				throw new Exception("You Do not agree Term And conditions");
 			}
 
-			users.setRole("user");
+			users.setRole("ROLE_USER");
 			users.setStatus(true);
+			users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 
 			System.out.println(agreement);
 			System.out.println(users);

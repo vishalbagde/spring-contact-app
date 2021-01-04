@@ -1,11 +1,11 @@
 package com.contact.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.contact.entity.Contact;
@@ -13,10 +13,21 @@ import com.contact.entity.Users;
 import com.contact.repository.UsersRepository;
 
 @Controller
+@RequestMapping("/user")
 public class UsersController {
 	
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	
+	@RequestMapping("/index")
+	public String dashboard() {
+		
+		System.out.println("inde call");
+		return "user/user_dashboard";
+	}
+
+	
 	
 	@GetMapping("/test")
 	@ResponseBody
