@@ -1,9 +1,11 @@
 package com.contact.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,39 +23,31 @@ public class UsersController {
 	
 	
 	@RequestMapping("/index")
-	public String dashboard() {
+	public String dashboard(Model model,Principal principal) {
 		
-		System.out.println("inde call");
+		String username=principal.getName();		
+		Users users=usersRepository.getUserByName(username);
+		model.addAttribute("user",users);
 		return "user/user_dashboard";
 	}
 
-	
-	
 	@GetMapping("/test")
 	@ResponseBody
 	public String test() {
 		
 		Users users=new Users();
-		users.setName("vishal");
-		users.setEmail("vishal2@gmail.com");
+		users.setName("vishal3");
+		users.setEmail("vishal9@gmail.com");
 		users.setPassword("vishal");
 		users.setAbout("this is test users");
-		users.setRole("admin");
-		users.setUserName("vbagde2");
+		users.setRole("ROLE_USER");
+		users.setUserName("vbagde9");
 		
 		Contact contact =new Contact();
 		contact.setFirstName("test");
 	
 		users.getContacts().add(contact);
 		usersRepository.save(users);
-		
-		Users u1=usersRepository.getOne(1);
-		
-		
-		List<Contact> myList=u1.getContacts();
-		System.out.println(myList);
-		
-		
 		return "working";
 	}
 	
