@@ -45,7 +45,7 @@ public class Users {
 	@Column(length = 500)
 	private String about;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
 	private Set<Contact> contacts = new HashSet<>();
 	
 	public Set<Contact> getContacts() {
